@@ -11,7 +11,11 @@ import { ContactCard } from './components/ContactCard';
 import { Footer } from './components/Footer';
 import { FloatingPomeranian } from './components/FloatingPomeranian';
 
+const isVisible = import.meta.env.VITE_IS_VISIBLE !== 'false';
+
 const App: React.FC = () => {
+  if (!isVisible) return null;
+
   return (
     <>
       <BackgroundAura />
