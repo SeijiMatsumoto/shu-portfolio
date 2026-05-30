@@ -160,62 +160,33 @@ export const ContactCard: React.FC = () => {
     setSubmitStatus('sending');
     setErrorMessage(null);
 
-    let response: Response | undefined;
-    let fetchError: unknown = null;
-
     try {
-      response = await fetch('/api/send', {
+      const formData = new FormData();
+      formData.append('access_key', '8d59fe2c-b358-42b3-928d-0a6d2c5c6dab');
+      formData.append('name', formState.name);
+      formData.append('email', formState.email);
+      formData.append('subject', `[Portfolio Contact] ${formState.subject}`);
+      formData.append('message', formState.message);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formState),
+        body: formData,
       });
-    } catch (err) {
-      fetchError = err;
-    }
 
-    // Smart fallback for standalone Vite local server (status 404 or connection refused)
-    if (!response || response.status === 404) {
-      console.warn(
-        'Vite standalone dev mode or network offline detected. Simulating successful form submission locally without Resend.',
-        fetchError
-      );
-      
-      setSubmitStatus('success');
-      triggerConfetti();
-      setFormState({ name: '', email: '', subject: '', message: '' });
+      const data = await response.json();
 
-      setTimeout(() => {
-        setSubmitStatus('idle');
-      }, 4000);
-      return;
-    }
-
-    // Process actual response from serverless function
-    try {
-      let data: { error?: string } = {};
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message || 'Failed to send message.');
       }
 
-      if (!response.ok) {
-        throw new Error(data.error || `Failed to send message (Status: ${response.status}).`);
+      if (!import.meta.env.DEV) {
+        localStorage.setItem('last_message_sent', Date.now().toString());
+        setCanSubmit(false);
+        setTimeRemainingMessage('Limit reached. Next message available in 7 days.');
       }
-
-      // Save sending timestamp to localStorage cache for 1 week rate limit
-      localStorage.setItem('last_message_sent', Date.now().toString());
-      setCanSubmit(false);
-      setTimeRemainingMessage('Limit reached. Next message available in 7 days.');
 
       setSubmitStatus('success');
       triggerConfetti();
-      setFormState({ name: '', email: '', subject: '', message: '' });
-
-      setTimeout(() => {
-        setSubmitStatus('idle');
-      }, 4000);
     } catch (err) {
       setSubmitStatus('idle');
       const message = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
@@ -289,7 +260,7 @@ export const ContactCard: React.FC = () => {
                       autoComplete="name"
                       value={formState.name}
                       onChange={handleInputChange}
-                      disabled={submitStatus === 'sending'}
+                      disabled={submitStatus !== 'idle' || !canSubmit}
                     />
                   </div>
                   <div className="form-group">
@@ -303,7 +274,7 @@ export const ContactCard: React.FC = () => {
                       autoComplete="email"
                       value={formState.email}
                       onChange={handleInputChange}
-                      disabled={submitStatus === 'sending'}
+                      disabled={submitStatus !== 'idle' || !canSubmit}
                     />
                   </div>
                 </div>
@@ -318,7 +289,7 @@ export const ContactCard: React.FC = () => {
                     required
                     value={formState.subject}
                     onChange={handleInputChange}
-                    disabled={submitStatus === 'sending'}
+                    disabled={submitStatus !== 'idle' || !canSubmit}
                   />
                 </div>
 
@@ -331,7 +302,7 @@ export const ContactCard: React.FC = () => {
                     required
                     value={formState.message}
                     onChange={handleInputChange}
-                    disabled={submitStatus === 'sending'}
+                    disabled={submitStatus !== 'idle' || !canSubmit}
                   />
                 </div>
 
