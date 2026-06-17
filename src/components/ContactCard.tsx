@@ -233,13 +233,13 @@ export const ContactCard: React.FC = () => {
                     )}
                   </button>
 
-                  <a href="https://www.linkedin.com/in/shu-wang-930779123/" target="_blank" rel="noopener noreferrer" className="contact-method-item">
+                  <a href="https://www.linkedin.com/in/shu-wang11/" target="_blank" rel="noopener noreferrer" className="contact-method-item">
                     <div className="contact-icon-wrapper">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                     </div>
                     <div>
                       <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 400 }}>Connect on LinkedIn</div>
-                      <div>linkedin.com/in/shu-wang</div>
+                      <div>linkedin.com/in/shu-wang11</div>
                     </div>
                   </a>
 
