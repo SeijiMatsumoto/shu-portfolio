@@ -169,7 +169,7 @@ export const BudgetSimulator: React.FC = () => {
             <div className="allocator-sidebar">
               <div className="speech-bubble-container">
                 <div className="speech-bubble-header">
-                  <img src="/shu-headshot.jpeg" alt="Shu Wang Mini Avatar" className="mini-avatar" />
+                  <img src="/shu-headshot.png" alt="Shu Wang Mini Avatar" className="mini-avatar" />
                   <div>
                     <div className="mini-avatar-name">Shu Wang</div>
                     <div className="mini-avatar-title">Growth Strategy Lead</div>

@@ -35,7 +35,7 @@ export const Hero: React.FC = () => {
             <div className="image-frame-container">
               <div className="image-frame-glow"></div>
               <div className="image-frame-border"></div>
-              <img src="/shu-headshot.jpeg" alt="Shu Wang Headshot" className="headshot-img" width="320" height="380" />
+              <img src="/shu-headshot.png" alt="Shu Wang Headshot" className="headshot-img" width="320" height="380" />
               <div className="dots-grid"></div>
             </div>
           </ScrollReveal>
