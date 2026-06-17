@@ -10,7 +10,7 @@ export const Navbar: React.FC = () => {
       setScrolled(window.scrollY > 50);
 
       // Simple active link highlight tracking
-      const sections = ['hero', 'engine', 'allocator', 'experience', 'skills', 'contact'];
+      const sections = ['hero', 'engine', 'experience', 'skills', 'contact'];
       const scrollPosition = window.scrollY + 180; // Offset for sticky navbar height
 
       for (const sectionId of sections) {
@@ -78,14 +78,6 @@ export const Navbar: React.FC = () => {
               className={`nav-link ${activeSection === 'engine' ? 'active' : ''}`}
             >
               Growth Engine
-            </button>
-          </li>
-          <li>
-            <button 
-              onClick={() => handleNavClick('allocator')} 
-              className={`nav-link ${activeSection === 'allocator' ? 'active' : ''}`}
-            >
-              Allocator
             </button>
           </li>
           <li>

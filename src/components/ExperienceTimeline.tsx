@@ -16,7 +16,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ role, company, date, locati
       <div className="timeline-dot"></div>
       <div className="timeline-content">
         <div className="timeline-header">
-          <div>
+          <div style={{ minWidth: 0 }}>
             <h3 className="timeline-role">{role}</h3>
             <div className="timeline-company">{company}</div>
           </div>

@@ -17,8 +17,8 @@
   --bg-card-hover: hsl(40, 50%, 97%);    /* Warm Beige Lift */
   --bg-nav: hsla(38, 55%, 96%, 0.85);    /* Semitransparent Sand */
   
-  --primary: hsl(120, 28%, 38%);        /* Sage / Forest Green (Nature) */
-  --primary-glow: hsla(120, 28%, 38%, 0.08);
+  --primary: hsl(120, 32%, 48%);        /* Sage / Forest Green (Nature) */
+  --primary-glow: hsla(120, 32%, 48%, 0.08);
   --secondary: hsl(18, 70%, 55%);       /* Warm Terracotta / Clay Pot */
   --accent: hsl(38, 95%, 60%);          /* Golden Honey Sunlight */
   
@@ -1063,8 +1063,7 @@ p {
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 1.25rem;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .timeline-role {
@@ -1083,6 +1082,7 @@ p {
 
 .timeline-meta {
   text-align: right;
+  flex-shrink: 0;
 }
 
 .timeline-date {
